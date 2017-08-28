@@ -44,7 +44,8 @@ RUN echo "@community http://nl.alpinelinux.org/alpine/v3.6/community" >> /etc/ap
  && mkdir /selfoss && unzip -q /tmp/selfoss-$VERSION.zip -d /selfoss \
  && sed -i -e 's/base_url=/base_url=\//g' /selfoss/defaults.ini \
  && apk del build-dependencies \
- && rm -rf /var/cache/apk/* /tmp/*
+ && rm -rf /var/cache/apk/* /tmp/* \
+ && chown -R $UID:$GID /selfoss /etc/nginx /etc/php7 /var/log /var/lib/nginx /tmp /etc/s6.d
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php7/php-fpm.conf
